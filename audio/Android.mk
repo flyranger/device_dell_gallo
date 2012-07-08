@@ -12,26 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#
-# Logitech Dual Action Controller
-#
+LOCAL_PATH := $(call my-dir)
 
-key 0x120    BUTTON_A
-key 0x123    BUTTON_B
-key 0x121    BUTTON_X
-key 0x122    BUTTON_Y
-key 0x124    BUTTON_L1
-key 0x125    BUTTON_R1
-key 0x126    BUTTON_L2
-key 0x127    BUTTON_R2
-key 0x128    BUTTON_SELECT
-key 0x129    BUTTON_START
-key 0x12a    BUTTON_THUMBL
-key 0x12b    BUTTON_THUMBR
+include $(CLEAR_VARS)
 
-axis 0x00    X
-axis 0x01    Y
-axis 0x02    Z
-axis 0x05    RZ
-axis 0x10    HAT_X
-axis 0x11    HAT_Y
+LOCAL_MODULE := audio.primary.gallo
+LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
+LOCAL_SRC_FILES := audio_hw.c
+LOCAL_C_INCLUDES += \
+	external/tinyalsa/include \
+	system/media/audio_utils/include \
+	system/media/audio_effects/include
+
+LOCAL_SHARED_LIBRARIES := liblog libcutils libtinyalsa libaudioutils libdl
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
+

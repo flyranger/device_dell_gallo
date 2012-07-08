@@ -1,16 +1,16 @@
 USE_CAMERA_STUB := true
-
+COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
 # inherit from the proprietary version
 -include vendor/dell/gallo/BoardConfigVendor.mk
 
 TARGET_BOARD_PLATFORM := tegra
-TARGET_TEGRA_VERSION := ap20
-
 TARGET_NO_BOOTLOADER := true
 TARGET_CPU_ABI := armeabi
 TARGET_BOOTLOADER_BOARD_NAME := gallo
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
+TARGET_ARCH_VARIANT_CPU := cortex-a9
+TARGET_ARCH_VARIANT_FPU := vfpv3-d16
 TARGET_ARCH_VARIANT := armv7-a
 TARGET_BOARD_PLATFORM := tegra
 ARCH_ARM_HAVE_TLS_REGISTER := true
@@ -36,29 +36,32 @@ USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/dell/gallo/egl.cfg
 
 # Wifi
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
+WPA_SUPPLICANT_VERSION      := VER_0_6_X
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 BOARD_WLAN_DEVICE           := bcm4329
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
+#BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
+#WIFI_BAND		    :=802_11
 WIFI_DRIVER_FW_PATH_STA     := "/system/vendor/firmware/fw_bcm4329.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/vendor/firmware/fw_bcm4329_apsta.bin"
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcm4329.ko"
 WIFI_DRIVER_MODULE_NAME     := "bcm4329"
-WIFI_DRIVER_MODULE_ARG      := "iface_name=wlan0 firmware_path=/system/vendor/firmware/fw_bcm4329.bin nvram_path=/system/etc/wifi/nvram.txt"
+WIFI_DRIVER_MODULE_ARG      := "iface_name=wlan0 firmware_path=/system/vendor/firmware/fw_bcm4329.bin nvram_path=/system/etc/nvram.txt"
+
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 # Use nicer font rendering
-BOARD_USE_SKIA_LCDTEXT := true
+#BOARD_USE_SKIA_LCDTEXT := true
 BOARD_INCLUDES_TEGRA_JNI:= graphics,cursor
 # Skip droiddoc build to save build time
 BOARD_SKIP_ANDROID_DOC_BUILD := true
 # Audio hack for streak7 - use legacy 3.2 libs
 BOARD_USES_GENERIC_AUDIO := false
+#BOARD_USES_ALSA_AUDIO := true
 BOARD_PREBUILT_LIBAUDIO := true
 BOARD_USES_AUDIO_LEGACY := true
 # GPS
-BOARD_HAVE_GPS_BCM := true
+BOARD_HAVE_GPS := true
 #     if no suitable mode is available, reverts to scale
 BOARD_HDMI_MIRROR_MODE := Scale
 # Avoid the generation of ldrcc instructions
